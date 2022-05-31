@@ -1,19 +1,28 @@
 import React from 'react';
 import cartIcon from './shopping-cart-solid.svg';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './app-header.scss';
 
-const AppHeader = ({total}) => {
+const AppHeader = ({items}) => {
+    const total = items.reduce((total, item) => total + item.volume * item.price, 0)
     return (
         <header className="header">
-            <a className="header__link" href="https://www.npmjs.com">
+            <Link to='/main' className="header__link">
                 Menu
-            </a>
-            <a className="header__link" href="https://www.npmjs.com">
+            </Link>
+            <Link to='/cart' className="header__link">
                 <img className="header__cart" src={cartIcon} alt="cart"></img>
                 Total: {total} $
-            </a>
+            </Link>
         </header>
     )
 };
 
-export default AppHeader;
+const mapStateToProps = ({items}) => {
+    return {items}
+};
+
+export default connect(mapStateToProps)(AppHeader);
+
+

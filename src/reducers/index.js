@@ -1,8 +1,7 @@
 const initialState = {
     menu: [],
     loading:true,
-    items: []
-
+    items: [],
 }
 
 const reducer = (state=initialState, action) => {
@@ -32,10 +31,10 @@ const reducer = (state=initialState, action) => {
                     id: item.id,
                     volume: 1
                 };
+
                 return {
                     ...state,
                     items: [...state.items, newItem],
-                    
                 };
             } else if (repeat && item) {
                 const repeatIndex = state.items.findIndex((item) => item.id === id)
@@ -66,7 +65,6 @@ const reducer = (state=initialState, action) => {
                 items: [
                     ...state.items.slice(0, itemIndex), 
                     ...state.items.slice(itemIndex + 1)
-                    
                 ]
             };
         default:
